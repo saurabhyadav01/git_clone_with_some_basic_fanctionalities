@@ -1,0 +1,102 @@
+*
+{
+    margin:0;
+    padding: 0;
+}
+#navBar
+{
+    display: flex;
+    background: black;
+    color: while;
+    height: 50px;
+}
+img
+{   
+height: 50px;
+border-radius: 50%;
+}
+#option
+{
+display: flex;
+list-style: none;
+color: white;
+margin: 10px;
+}#profile>img{
+float: left;
+height: 40px;
+width: 40px;
+}a{
+text-decoration: none;
+color: white;
+margin: 10px;
+}#search-box
+{
+margin-top: 12px;
+width: 250px;
+height: 30px;
+border-radius: 2px;
+border: none;
+}#profile>img
+{
+margin-left: 500px;
+padding: 5px;
+}
+.nav_container
+{
+    width: 100%;
+    display: flex;
+    border: 1px solid transparent;
+    height: 700px;
+    background-color: black;
+    color: white;
+}.right
+{
+    width: 30%;
+    border: 1px solid transparent;
+}.left
+{
+    width: 70%;
+    border: 1px solid transparent;  
+}
+#repo_con>div
+{
+    display: flex;
+  
+}#repo_con>div>a{
+padding: 20px;
+font-size: 20px;
+}
+#userProfile>div
+{
+width: 80%;
+margin: auto;
+}
+#userProfile>div>img
+
+{
+width: 70%;
+height: 250px;
+margin-top: 20px;
+
+}#userProfile>div>p{
+    line-height: 25px;
+}#repo_details
+{
+  
+   border: 1px solid transparent;
+   height: 98%;
+   overflow: scroll;
+}#repo_details>div
+{
+    display: flex;
+overflow: scroll;
+height: 20%;
+padding: 10px;
+    
+}#repo_details>div>h1{
+    margin: 10px;
+    color: rgb(49, 49, 255);
+}#repo_details>div>h3{
+    margin: 20px;
+    color: blue;
+}

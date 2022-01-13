@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<div id="navbar">
+ 
+</div>
+
+  <div class="nav_container">
+  
+    <div class="right">
+      <div id="userProfile"></div>
+    </div>
+    <hr>
+    <div class="left">
+      <div id="repo_con"></div>
+    <div id="repo_details"></div>
+    </div>
+  </div>
+</body>
+</html>
+<script type="module">
+ import navbar from "./component/navbar.js";
+ var nav_container=document.getElementById("navbar");
+ nav_container.innerHTML=navbar();
+ //console.log(navbar());
+// GET USER
+ import getUser from "./component/getUser.js";
+
+// var api_link=`https://fakestoreapi.com/products/categories`
+var x="alokkumar-dev"
+// alokkumar-dev
+
+var input=document.getElementById("search-box");
+input.addEventListener("keypress",searchUser)
+   async function searchUser(event)
+   {
+      document.querySelector("#userProfile").innerHTML="";
+      document.getElementById("repo_con").innerHTML="";
+      document.getElementById("repo_details").innerHTML="";
+      document.getElementById("repo_con").innerHTML=""
+       if(event.key==="Enter")
+       {
+        console.log("Hii");
+       console.log(event);
+       var query=input.value;
+       
+     //  var data=fetch_api(api_link);
+     var data= await getUser(query);
+       var {avatar_url}= await getUser(query);
+       repo_navbar(data)
+       var imgage=document.getElementById("profile_img");
+      imgage.setAttribute("src",avatar_url);
+      console.log(data)
+      //console.log(res.avatar_url)
+
+    //  let {created_at}=response;
+    //  console.log(created_at)
+       }
+
+   }
+   repo_navbar()
+      function repo_navbar(data)
+
+      {
+        try
+        {
+        
+          allrepo(data.login)
+          var div_left=document.createElement("div");
+      //  div.setAttribute("id","repo_nav");
+         var ovewiew=document.createElement("a");
+         ovewiew.textContent="Overview"
+         var repo=document.createElement("a");
+         repo.textContent="Repositories "+data.public_repos
+         var pro=document.createElement("a");
+         pro.textContent="Project"
+         var pack=document.createElement("a");
+         pack.textContent="package";
+         var star=document.createElement("a");
+         star.textContent="star";
+           
+         var div_right=document.createElement("div");
+
+         var image=document.createElement("img");
+         image.setAttribute("src",data.avatar_url);
+         
+          var username=document.createElement("h4");
+          username.textContent=data.login;
+            
+          var name=document.createElement("h1");
+          name.textContent=data.name;
+
+         
+
+          var button=document.createElement("button");
+          button.textContent="Edit Profile";
+
+          var follower=document.createElement("p");
+          
+          follower.textContent="Follower "+data.followers;
+          var following=document.createElement("p");
+          following.textContent="Following "+data.boi;
+
+          var address=document.createElement("p");
+          address.textContent="Address "+data.location;
+          var twitter_u=document.createElement("p");
+          twitter_u.textContent="Twitter "+data.twitter_username;
+       //  console.log(data.avatar_url)
+           div_right.append(image,name,username,button,follower,following,address,twitter_u);
+           document.getElementById("userProfile").append(div_right)
+
+
+         div_left.append(ovewiew,repo,pro,pack,star);
+          document.getElementById("repo_con").append(div_left)
+        }catch(e)
+        {
+          console.log(e)
+        }
+      }
+
+       async function allrepo(user_name)
+      {
+       console.log(user_name)
+        var res= await fetch(`https://api.github.com/users/${user_name}/repos`);
+        var repo=await res.json();
+        repo.map(function(elem)
+        {
+          console.log(elem);
+          var div=document.createElement("div");
+
+          var repo_name=document.createElement("h1");
+          repo_name.textContent=elem.name;
+         
+          var status=document.createElement("h3");
+          status.textContent=elem.visibility;
+     
+          // var rating=document.createElement("h5");
+          // rating.textContent="";
+      
+           var update=document.createElement("h3");
+           update.textContent=elem.created_at;
+
+          div.append(repo_name,status,update)
+
+          document.getElementById("repo_details").append(div)
+         
+          
+        })
+      }
+</script>
